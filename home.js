@@ -147,6 +147,7 @@ document
     document.getElementById("pay-bill-parent").style.display = "none";
 
     document.getElementById("bonus-parent").style.display = "none";
+    document.getElementById("latest-section").style.display = "none";
     document.getElementById("add-money-parent").style.display = "block";
   });
 document
@@ -156,6 +157,7 @@ document
     document.getElementById("transfer-parent").style.display = "none";
     document.getElementById("transaction-parent").style.display = "none";
     document.getElementById("pay-bill-parent").style.display = "none";
+    document.getElementById("latest-section").style.display = "none";
 
     document.getElementById("bonus-parent").style.display = "none";
     document.getElementById("cash-out-parent").style.display = "block";
@@ -168,6 +170,8 @@ document
     document.getElementById("transaction-parent").style.display = "none";
     document.getElementById("pay-bill-parent").style.display = "none";
     document.getElementById("bonus-parent").style.display = "none";
+    document.getElementById("latest-section").style.display = "none";
+
     document.getElementById("transfer-parent").style.display = "block";
   });
 document.getElementById("card-bonus").addEventListener("click", function (e) {
@@ -176,6 +180,7 @@ document.getElementById("card-bonus").addEventListener("click", function (e) {
   document.getElementById("transfer-parent").style.display = "none";
   document.getElementById("transaction-parent").style.display = "none";
   document.getElementById("pay-bill-parent").style.display = "none";
+  document.getElementById("latest-section").style.display = "none";
 
   document.getElementById("bonus-parent").style.display = "block";
 });
@@ -197,5 +202,7 @@ document
     document.getElementById("transfer-parent").style.display = "none";
     document.getElementById("bonus-parent").style.display = "none";
     document.getElementById("pay-bill-parent").style.display = "none";
+    document.getElementById("latest-section").style.display = "none";
+
     document.getElementById("transaction-parent").style.display = "block";
   });
