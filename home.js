@@ -1,6 +1,6 @@
 // ****add money feature
 
-const pinNumber = 2345;
+const pinNumber = 1234;
 document
   .getElementById("btn-add-money")
   .addEventListener("click", function (e) {
