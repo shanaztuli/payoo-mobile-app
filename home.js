@@ -1,21 +1,66 @@
+// ****FUNCTION to get INPUT values
+function getInputValueNumber(id) {
+  const inputField = document.getElementById(id);
+  const inputFieldValue = inputField.value;
+  const inputFieldValueNumber = parseInt(inputFieldValue);
+  return inputFieldValueNumber;
+}
+function getInputValue(id) {
+  const inputField = document.getElementById(id);
+  const inputFieldValue = inputField.value;
+  return inputFieldValue;
+}
+///****FUNCTION to get InnerText
+function getInnerText(id) {
+  const element = document.getElementById(id);
+  const elementValue = element.innerText;
+  const elementValueNumber = parseInt(elementValue);
+  return elementValueNumber;
+}
+///****FUNCTION to Set InnerText;;
+function setInnerText(value) {
+  // console.log(value);
+  const availableBalanceElement = document.getElementById("available-balance");
+  availableBalanceElement.innerText = value;
+}
+///****FUNCTION  to card Toggle;
+function toggleHandle(id) {
+  const forms = document.getElementsByClassName("form");
+  for (const form of forms) {
+    form.style.display = "none";
+  }
+  document.getElementById(id).style.display = "block";
+}
+///****FUNCTION  to Toggle  card button style;
+function toggleHandleButton(id) {
+  const formBtns = document.getElementsByClassName("form-btn");
+  for (const btn of formBtns) {
+    btn.classList.remove(
+      "border-[#0874f2]",
+      "bg-[#0874f20d]",
+      "text-[#0874f2]"
+    );
+    btn.classList.add("border-gray-300");
+  }
+  document.getElementById(id).classList.remove("border-gray-300");
+  document
+    .getElementById(id)
+    .classList.add("border-[#0874f2]", "bg-[#0874f20d]", "text-[#0874f2]");
+}
+
 // ****add money feature
 
 const pinNumber = 1234;
+const transactionData = [];
 document
   .getElementById("btn-add-money")
   .addEventListener("click", function (e) {
     e.preventDefault();
     const getBank = document.getElementById("bank").value;
-    const getAccount = document.getElementById("add-account").value;
-    const getAmountValue = parseInt(
-      document.getElementById("add-amount").value
-    );
-    const getPinValue = parseInt(document.getElementById("add-pin").value);
-
-    // console.log(getBank, getAccount, getAmountValue, getPinValue);
-    const availableBalance = parseInt(
-      document.getElementById("available-balance").innerText
-    );
+    const getAccount = getInputValue("add-account");
+    const getAmountValue = getInputValueNumber("add-amount");
+    const getPinValue = getInputValueNumber("add-pin");
+    const availableBalance = getInnerText("available-balance");
     if (getAccount.length < 11) {
       alert("please provide valid account number");
       return;
@@ -26,23 +71,25 @@ document
     }
     // console.log(availableBalance);
     const totalAvailableBalance = getAmountValue + availableBalance;
-    document.getElementById("available-balance").innerText =
-      totalAvailableBalance;
+    setInnerText(totalAvailableBalance);
+
+    const data = {
+      name: "Add Money",
+      date: new Date().toLocaleDateString,
+    };
+    transactionData.push(data);
+    console.log(transactionData);
   });
 
 //******cashout money feature
 
 document.getElementById("btn-withdraw").addEventListener("click", function (e) {
   e.preventDefault();
-  const agentNumber = document.getElementById("agent-number").value;
+  const agentNumber = getInputValue("agent-number");
 
-  const cashPinNumber = document.getElementById("cash-pin-number").value;
-  const withdrawAmount = parseInt(
-    document.getElementById("withdraw-amount").value
-  );
-  const availableBalance = parseInt(
-    document.getElementById("available-balance").innerText
-  );
+  const cashPinNumber = getInputValue("cash-pin-number");
+  const withdrawAmount = getInputValueNumber("withdraw-amount");
+  const availableBalance = getInnerText("available-balance");
 
   if (agentNumber.length < 11) {
     alert("Please provide valid agent number");
@@ -55,8 +102,7 @@ document.getElementById("btn-withdraw").addEventListener("click", function (e) {
 
   // console.log(withdrawAmount, availableBalance);
   const totalNewAvailableBalance = availableBalance - withdrawAmount;
-  document.getElementById("available-balance").innerText =
-    totalNewAvailableBalance;
+  setInnerText(totalNewAvailableBalance);
 });
 
 // ***** transfer money feature
@@ -141,68 +187,34 @@ document.getElementById("btn-pay-now").addEventListener("click", function (e) {
 document
   .getElementById("button-add-money")
   .addEventListener("click", function (e) {
-    document.getElementById("cash-out-parent").style.display = "none";
-    document.getElementById("transfer-parent").style.display = "none";
-    document.getElementById("transaction-parent").style.display = "none";
-    document.getElementById("pay-bill-parent").style.display = "none";
-
-    document.getElementById("bonus-parent").style.display = "none";
-    document.getElementById("latest-section").style.display = "none";
-    document.getElementById("add-money-parent").style.display = "block";
+    toggleHandle("add-money-parent");
+    toggleHandleButton("button-add-money");
   });
 document
   .getElementById("button-cashout")
   .addEventListener("click", function (e) {
-    document.getElementById("add-money-parent").style.display = "none";
-    document.getElementById("transfer-parent").style.display = "none";
-    document.getElementById("transaction-parent").style.display = "none";
-    document.getElementById("pay-bill-parent").style.display = "none";
-    document.getElementById("latest-section").style.display = "none";
-
-    document.getElementById("bonus-parent").style.display = "none";
-    document.getElementById("cash-out-parent").style.display = "block";
+    toggleHandle("cash-out-parent");
+    toggleHandleButton("button-cashout");
   });
 document
   .getElementById("btn-transfer-money")
   .addEventListener("click", function (e) {
-    document.getElementById("add-money-parent").style.display = "none";
-    document.getElementById("cash-out-parent").style.display = "none";
-    document.getElementById("transaction-parent").style.display = "none";
-    document.getElementById("pay-bill-parent").style.display = "none";
-    document.getElementById("bonus-parent").style.display = "none";
-    document.getElementById("latest-section").style.display = "none";
-
-    document.getElementById("transfer-parent").style.display = "block";
+    toggleHandle("transfer-parent");
+    toggleHandleButton("btn-transfer-money");
   });
 document.getElementById("card-bonus").addEventListener("click", function (e) {
-  document.getElementById("add-money-parent").style.display = "none";
-  document.getElementById("cash-out-parent").style.display = "none";
-  document.getElementById("transfer-parent").style.display = "none";
-  document.getElementById("transaction-parent").style.display = "none";
-  document.getElementById("pay-bill-parent").style.display = "none";
-  document.getElementById("latest-section").style.display = "none";
-
-  document.getElementById("bonus-parent").style.display = "block";
+  toggleHandle("bonus-parent");
+  toggleHandleButton("card-bonus");
 });
 document
   .getElementById("card-pay-bill")
   .addEventListener("click", function (e) {
-    document.getElementById("add-money-parent").style.display = "none";
-    document.getElementById("cash-out-parent").style.display = "none";
-    document.getElementById("transfer-parent").style.display = "none";
-    document.getElementById("bonus-parent").style.display = "none";
-    document.getElementById("transaction-parent").style.display = "none";
-    document.getElementById("pay-bill-parent").style.display = "block";
+    toggleHandle("pay-bill-parent");
+    toggleHandleButton("card-pay-bill");
   });
 document
   .getElementById("card-transactions")
   .addEventListener("click", function (e) {
-    document.getElementById("add-money-parent").style.display = "none";
-    document.getElementById("cash-out-parent").style.display = "none";
-    document.getElementById("transfer-parent").style.display = "none";
-    document.getElementById("bonus-parent").style.display = "none";
-    document.getElementById("pay-bill-parent").style.display = "none";
-    document.getElementById("latest-section").style.display = "none";
-
-    document.getElementById("transaction-parent").style.display = "block";
+    toggleHandle("transaction-parent");
+    toggleHandleButton("card-transactions");
   });
